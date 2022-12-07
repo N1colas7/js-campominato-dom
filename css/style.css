@@ -1,0 +1,53 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: cadetblue;
+}
+
+header{
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: white;
+}
+
+.contain-header{
+    height: 100%;
+    display: flex;
+}
+
+.play{
+    height: 70%;
+}
+
+.container{
+    width: 720px;
+    height: 720px;
+    margin: 3rem auto;
+    background-color: white;
+}
+
+.grid{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-wrap: wrap;
+}
+
+.square{
+    width: calc(100% / 10);
+    height: calc(100% / 10);
+    cursor: pointer;
+    background-color: rgb(53, 206, 79);
+    border: 1px solid white;
+}
+
+.clicked{
+    background-color: rgb(15, 28, 146);
+}

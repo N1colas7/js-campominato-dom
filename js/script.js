@@ -1,32 +1,81 @@
-function createGridSquare(num) 
-{
-    const currentElement = document.createElement('div')
+function createNewGame() {
+    let difficulty = parseInt(document.getElementById('select').value);
+    
+    let cellsNumber;
+    let cellsPerRow;
 
-    currentElement.classList.add('square');
-    currentElement.innerText= num
-
-    return currentElement;
+    switch(difficulty){
+        case 1:
+            cellsNumber = 100;
+            cellsPerRow = 10;
+            break;
+        case 2:
+            cellsNumber = 81;
+            cellsPerRow = 9;
+            break;    
+        case 3:
+            cellsNumber = 49;
+            cellsPerRow = 7;
+            break; 
+        default:
+            cellsNumber = 100;
+            cellsPerRow = 10;
+            break;       
+    }    
+    //chiamo la funzione per la griglia 
+    createGameGrid(cellsNumber, cellsPerRow);
 }
 
-let grid = document.getElementById('grid');
+function createSingleCell(num, cells_per_row)
+{
+    const cell = document.createElement('div')
 
-let button_first = document.getElementById('play')
-button_first.addEventListener('click',function () {
-        
-    for (let i = 1; i <= 100; i++) {
-        let containerSquare = document.getElementById('container')
-        let currentSquare = createGridSquare(i);
-       
-        
-        currentSquare.addEventListener('click',function () {
-        currentSquare.innerText = i;
-    
-        
-        this.classList.add('clicked');
-        console.log(`Hai cliccato la cella numero ${i} `);
+    cell.classList.add('square');
+
+    let sideLength = '100px';
+
+    cell.style.width = sideLength;
+    cell.style.height = sideLength;
+
+    cell.innerText = num;
+
+    return cell;
+}
+
+function createGameGrid(cellsNumber, cellsPerRow) 
+{
+    document.querySelector('.container').innerHTML = '';
+        /*for (let i = 0; i < 100; i++) {
+            const cell = document.createElement('div');
+            cell.classList.add('square');
+            cell.innerText = i+1;
+            cell.addEventListener('click', function(){
+                this.classList.toggle('clicked');
+                console.log(this.innerText);
+        });
+        document.querySelector('.grid').appendChild(cell);
+    }*/
+    const grid = document.createElement('div');
+    grid.classList.add('grid');
+
+    const grid_side = cellsPerRow * 100;
+    grid.style.width = `${grid_side}px`;
+    grid.style.height = `${grid_side}px`;
+
+    for (let i = 0; i < cellsNumber; i++) {
+        const cell = createSingleCell(i+1, cellsPerRow);    
+        cell.addEventListener('click',function(){
+            this.classList.toggle('clicked');
     })
-        grid.appendChild(currentSquare);
-        
+        grid.appendChild(cell);
     }
-})
+    document.querySelector('.container').appendChild(grid)
+}
+document.getElementById('play').addEventListener('click', function(){
+    createNewGame();
+})    
+
+
+
+
 

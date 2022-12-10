@@ -20,10 +20,18 @@ header{
 .contain-header{
     height: 100%;
     display: flex;
+    justify-content: space-around;
 }
 
 .play{
-    height: 70%;
+    height: 70px;
+    padding: 10px;
+}
+
+.select{
+    height: 70px;
+    padding: 10px;
+    margin-left: 25px;
 }
 
 .container{

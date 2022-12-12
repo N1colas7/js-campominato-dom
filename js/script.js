@@ -1,6 +1,9 @@
 function createNewGame() {
     let difficulty = parseInt(document.getElementById('select').value);
     
+    let arrayBombs = [];
+
+
     let cellsNumber;
     let cellsPerRow;
 
@@ -22,6 +25,10 @@ function createNewGame() {
             cellsPerRow = 10;
             break;       
     }    
+
+    arrayBombs = createBombsArray(1, cellsNumber);
+    console.log(arrayBombs);
+
     //chiamo la funzione per la griglia 
     createGameGrid(cellsNumber, cellsPerRow);
 }
@@ -75,7 +82,23 @@ document.getElementById('play').addEventListener('click', function(){
     createNewGame();
 })    
 
+function createBombsArray( min, max)
+{
+    let bombs = [];
+    let i = 0;
+    while(i < 16){
+        let number = Math.floor(Math.random() * (max - min + 1)) + min;
+        
+        if(!bombs.includes(number)){
+            bombs.push(number);
+        i++;
+        }
 
+    }
+
+    return bombs;
+
+}
 
 
 

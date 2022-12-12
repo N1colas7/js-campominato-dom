@@ -66,6 +66,8 @@ function createGameGrid(bombs_array, cellsNumber, cellsPerRow)
     grid.style.width = `${grid_side}px`;
     grid.style.height = `${grid_side}px`;
 
+    let goodCells = 0;
+
     for (let i = 0; i < cellsNumber; i++) {
         const cell = createSingleCell(i+1, cellsPerRow);    
         cell.addEventListener('click',function(){
@@ -75,7 +77,11 @@ function createGameGrid(bombs_array, cellsNumber, cellsPerRow)
             if (bombs_array.includes(parseInt(this.innerText))) {
                 this.classList.add('red');
                 grid.classList.add('events-none');
-                alert('Hai preso una bomba')
+                alert('Hai preso una bomba:'+ this.innerText)
+                alert('Il tuo punteggio è' +  goodCells)
+            }
+            else{
+                goodCells++;
             }
     })
         grid.appendChild(cell);

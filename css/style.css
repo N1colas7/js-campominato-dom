@@ -55,3 +55,11 @@ header{
 .clicked{
     background-color: rgb(15, 28, 146);
 }
+
+.red{
+    background-color: red;
+}
+
+.events-none{
+    pointer-events: none;
+}

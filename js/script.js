@@ -1,9 +1,6 @@
 function createNewGame() {
     let difficulty = parseInt(document.getElementById('select').value);
     
-    let arrayBombs = [];
-
-
     let cellsNumber;
     let cellsPerRow;
 
@@ -26,30 +23,30 @@ function createNewGame() {
             break;       
     }    
 
-    arrayBombs = createBombsArray(1, cellsNumber);
-    console.log(arrayBombs);
+    let arrayBombs = createBombsArray(1, cellsNumber);
 
     //chiamo la funzione per la griglia 
-    createGameGrid(cellsNumber, cellsPerRow);
+    createGameGrid(arrayBombs, cellsNumber, cellsPerRow);
 }
 
-function createSingleCell(num, cells_per_row)
+function createBombsArray( min, max)
 {
-    const cell = document.createElement('div')
+    let bombs = [];
+    let i = 0;
+    while(i < 16){
+        let number = Math.floor(Math.random() * (max - min + 1)) + min;
+        
+        if(!bombs.includes(number)){
+            bombs.push(number);
+        i++;
+        }
 
-    cell.classList.add('square');
+    }
 
-    let sideLength = '100px';
-
-    cell.style.width = sideLength;
-    cell.style.height = sideLength;
-
-    cell.innerText = num;
-
-    return cell;
+    return bombs;
 }
 
-function createGameGrid(cellsNumber, cellsPerRow) 
+function createGameGrid(bombs_array, cellsNumber, cellsPerRow) 
 {
     document.querySelector('.container').innerHTML = '';
         /*for (let i = 0; i < 100; i++) {
@@ -72,32 +69,40 @@ function createGameGrid(cellsNumber, cellsPerRow)
     for (let i = 0; i < cellsNumber; i++) {
         const cell = createSingleCell(i+1, cellsPerRow);    
         cell.addEventListener('click',function(){
+            
             this.classList.toggle('clicked');
+            
+            if (bombs_array.includes(parseInt(this.innerText))) {
+                this.classList.add('red');
+                grid.classList.add('events-none');
+                alert('Hai preso una bomba')
+            }
     })
         grid.appendChild(cell);
     }
     document.querySelector('.container').appendChild(grid)
+
 }
+
 document.getElementById('play').addEventListener('click', function(){
     createNewGame();
+
 })    
 
-function createBombsArray( min, max)
+function createSingleCell(num, cells_per_row)
 {
-    let bombs = [];
-    let i = 0;
-    while(i < 16){
-        let number = Math.floor(Math.random() * (max - min + 1)) + min;
-        
-        if(!bombs.includes(number)){
-            bombs.push(number);
-        i++;
-        }
+    const cell = document.createElement('div')
 
-    }
+    cell.classList.add('square');
 
-    return bombs;
+    let sideLength = '100px';
 
+    cell.style.width = sideLength;
+    cell.style.height = sideLength;
+
+    cell.innerText = num;
+
+    return cell;
 }
 
 
